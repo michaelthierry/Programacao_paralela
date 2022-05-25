@@ -14,8 +14,8 @@ public class MinhaThreadRunable implements Runnable{
     public MinhaThreadRunable(String nome, int tempo){
         this.nome = nome;
         this.tempo = tempo;
-        Thread t = new Thread(this);
-        t.start();
+        //Thread t = new Thread(this);
+        //t.start();
     }
     
     //Implementando o metro run
