@@ -1,17 +1,18 @@
 public class Main {
     public static void main(String[] args) {
-        //Criando um programa e setando um Id
-        Programa programa1 = new Programa();
-        programa1.setId(1);
-        //Criando uma thread passado o programa criado e executando
-        Thread t1 = new Thread(programa1);
+        //Criando o programa(1) e setando um Id
+        Programa p1 = new Programa();
+        p1.setId(1);
+        //Criando uma thread, passado o programa criado e executando
+        Thread t1 = new Thread(p1);
         t1.start();
 
-        //Crinadoum segundo programa e setando o id
-        Programa programa2 = new Programa();
-        programa2.setId(2);
-        //Criando outro processo passado o o programa e executando
-        Thread t2 = new Thread(programa2);
+
+        //Criando um o programa(2) e setando o id
+        Programa p2 = new Programa();
+        p2.setId(2);
+        //Criando outra thread, passado o programa e executando
+        Thread t2 = new Thread(p2);
         t2.start();
 
         
