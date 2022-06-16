@@ -2,8 +2,7 @@ public class TorredeControle extends Thread{
     //As duas pistas que precisamos
     private boolean pistaDecolagem;
     private boolean pistaAterrizagem;
-    private Aeronave nave;
-    
+
     //Construtor
     public TorredeControle(){
         this.pistaDecolagem = true;
@@ -22,7 +21,6 @@ public class TorredeControle extends Thread{
         notifyAll();
     }   
     
-
     public synchronized boolean getPistaDecolagem() {
         return pistaDecolagem;
     }

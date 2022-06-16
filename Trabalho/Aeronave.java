@@ -65,7 +65,6 @@ public class Aeronave extends Thread{
             */
             
             while(torre.getPistaDecolagem() == false){
-                
                 System.out.println("Aeronave: "+this.nome+"\u001B[35m"+" aguardando no patio"+"\u001B[0m");
                 torre.aguardaNaPista();
             }
