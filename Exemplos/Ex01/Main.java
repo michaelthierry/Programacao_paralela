@@ -1,5 +1,6 @@
 /**
  * Criando uma Thread implementado a interface Runnable
+ * - Interface Runnable
  */
 public class Main {
     public static void main(String[] args) {

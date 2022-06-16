@@ -8,9 +8,9 @@ public class MinhaThread extends Thread{
 
     //Construtor
     public MinhaThread(String nome, int tempo){
-        this.nome = nome;
-        this.tempo = tempo;
-        this.start();
+        this.nome = nome; //Nome da thread
+        this.tempo = tempo; //Tempo de Sleep da thread
+        this.start(); //Inicia a thread
     }
 
     //Implementando o metodo run()

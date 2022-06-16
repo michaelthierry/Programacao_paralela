@@ -1,4 +1,4 @@
-public class Main {
+public class Main2 {
     public static void main(String[] args) {
 
         MinhaThreadRunable tr1 = new MinhaThreadRunable("1", 500);
@@ -13,14 +13,11 @@ public class Main {
         t2.start();
         t3.start();
 
-        /**A linha abaixo é executado antes das threads terminar*/
-        //System.out.println("Programa principal terminou!");
-
         /**Primeira Solução: com isAlive
          * Enquanto as thread estiverem vivas o programa principal neste ponto
          * vai a mimir, codigo abaixo:
          */
-        /*
+        
         while(t1.isAlive() || t2.isAlive() || t3.isAlive()){
             try {
                 Thread.sleep(100);
@@ -29,22 +26,11 @@ public class Main {
             }
         }
         System.out.println("Programa principal terminou!");
-        */
+        /**Essa solução apesar de funcionar não é uma solução legal
+         * supondo que os numeros de thread seja grande, a condição do nosso while
+         * se tornará gigante. Veja o Main3 para uma solução melhor
+         */
 
-        /**Segunda Solução: com o join() 
-         * Com o join a proxima thread so sera iniciada depois que a tread
-         * que chama join terminar ou depois dos milisegundos de que a thread join for inicializada
-        */
-
-        try {
-            t1.join();
-            t2.join();
-            t3.join();
-        } catch (Exception e) {
-            e.printStackTrace();
-            //TODO: handle exception
-        }
-        System.out.println("Programa principal terminou!");
 
     }
 }

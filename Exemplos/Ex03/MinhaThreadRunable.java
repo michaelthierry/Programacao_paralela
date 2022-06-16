@@ -14,8 +14,8 @@ public class MinhaThreadRunable implements Runnable{
     public MinhaThreadRunable(String nome, int tempo){
         this.nome = nome; // Nome da Thread
         this.tempo = tempo; // Tempo de Sleep
-        Thread t = new Thread(this); // Cria uma nova thread passando essa instancia
-        t.start(); //Inicia a thread
+        //Thread t = new Thread(this); // Cria uma nova thread passando essa instancia
+        //t.start(); //Inicia a thread
     }
     
     //Implementando o metodo run
