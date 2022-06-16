@@ -63,13 +63,7 @@ public class Aeronave extends Thread{
             /*Enquando a pista não é liberada a aeronave deve esperar
              *se o nome da empresa não for prioritario
             */
-            if(torre.getPistaDecolagem() == false){
-                try {
-                    this.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+            
             while(torre.getPistaDecolagem() == false){
                 
                 System.out.println("Aeronave: "+this.nome+"\u001B[35m"+" aguardando no patio"+"\u001B[0m");
