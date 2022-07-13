@@ -1,16 +1,16 @@
 public class TorredeControle extends Thread{
-    //As duas pistas que precisamos
+    /*As duas pistas que precisamos*/
     private boolean pistaDecolagem;
     private boolean pistaAterrizagem;
 
-    //Construtor
+    /*Construtor*/
     public TorredeControle(){
         this.pistaDecolagem = true;
         this.pistaAterrizagem = true;
-       
         this.start();
     }
-    //Metodos para manipular as pistas
+
+    /*Metodos para manipular as pistas*/
     public synchronized void setPistaAterrizagem(boolean status){
         pistaAterrizagem = status;
         notifyAll();
@@ -27,7 +27,8 @@ public class TorredeControle extends Thread{
     public synchronized boolean getPistaAterrizagem() {
         return pistaAterrizagem;
     }
-    //Metodo onde estabeleço a forma de escalonamento das pistas
+
+    /*Metodo onde é estabelecido a forma de escalonamento das pistas*/
     public void run(){
         
         while(true){
@@ -35,12 +36,14 @@ public class TorredeControle extends Thread{
             setPistaAterrizagem(false);
             setPistaDecolagem(false);
             System.out.println("\u001B[31m"+"Pistas Fechadas"+"\u001B[0m");
+
             /*Vamos fazer a pista aguardar por uma notificação */
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             //libero as pista
             setPistaAterrizagem(true);
             setPistaDecolagem(true);
@@ -54,26 +57,32 @@ public class TorredeControle extends Thread{
             }
         }
     }
-
-    public synchronized void aguardaNaPista(){  
-        try {
-            wait();
-        } catch (Exception e) {
-            e.printStackTrace();
+    /*Metodo faz que o chama esperar */
+    public synchronized void aguardaNoPatio(Aeronave a){
+        if(a.getPriority() == Thread.MAX_PRIORITY){
+            this.pistaDecolagem = true;
+            notify();
+        }else{
+            try {
+                wait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            notifyAll();
+        
         }
-        notifyAll();
-
+            
+        
     }
-    public synchronized void aguardaSolicitacao(){  
-        try {
-            wait();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public synchronized void solicitaDecolagem(Aeronave nave){
+        
+        if((this.pistaDecolagem == false)){
+            try {
+                nave.wait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
-    }
-
-    public synchronized String empresaPrioritaria(){
-        return "GOL";
+        this.pistaDecolagem = true;
     }
 }

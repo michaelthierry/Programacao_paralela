@@ -2,12 +2,14 @@ public class Aeronave extends Thread{
     /*Atributos da Aeronave */
     private String nome;
     private String nomeEmpresa;
+    private double tanque;
     private TorredeControle torre;
 
     /*Construtor da Aeronave */
-    public Aeronave(String nome, String nomeEmpresa, TorredeControle torre) {
+    public Aeronave(String nome, String nomeEmpresa, double tanque, TorredeControle torre) {
         this.nome = nome;
         this.nomeEmpresa = nomeEmpresa;
+        this.tanque = tanque;
         this.torre = torre;
         //this.start();
     }
@@ -29,6 +31,14 @@ public class Aeronave extends Thread{
         this.nomeEmpresa = nomeEmpresa;
     }
 
+    public double getTanque() {
+        return tanque;
+    }
+
+    public void setTanque(double tanque) {
+        this.tanque += tanque;
+    }
+
     /*Sobreecrita de metodo toString*/
     public String toString(){
         return "Aeronave: "+this.nome+" Empresa: "+this.nomeEmpresa;
@@ -46,11 +56,17 @@ public class Aeronave extends Thread{
     /*Inicialmente vamos fazer a aeronave sobrevoar por um tempo especifico */
     public void voar(){
         try {
-            Thread.sleep(750);
+            Thread.sleep(2000);
+            this.tanque -= 1.0;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Aeronave: "+this.nome+" está voando");
+        if(this.tanque <= 0){
+            System.out.println("Aeronave: "+this.nome+" está caindo");
+        }else{
+            System.out.println("Aeronave: "+this.nome+" está voando");
+        }
+        
     }
 
     /* Aqui a Aeronave deve perdir permissão para o torre de controle do aeroporto para decolar ou aterrizar
@@ -59,15 +75,15 @@ public class Aeronave extends Thread{
         
         while(true){
             //Aeronave solicita a pista
-            System.out.println("Aeronave: "+this.nome+"\u001B[33m"+" solicita delocagem"+"\u001B[0m");
-            /*Enquando a pista não é liberada a aeronave deve esperar
-             *se o nome da empresa não for prioritario
-            */
+           
             
+            /*Enquando a pista não é liberada a aeronave deve esperar no patio*/ 
+            System.out.println("Aeronave: "+this.nome+"\u001B[33m"+" solicita delocagem "+"\u001B[0m"+this.getPriority());
             while(torre.getPistaDecolagem() == false){
                 System.out.println("Aeronave: "+this.nome+"\u001B[35m"+" aguardando no patio"+"\u001B[0m");
-                torre.aguardaNaPista();
+                torre.aguardaNoPatio(this);
             }
+            torre.setPistaDecolagem(false);
 
             //torre.aguardaPista();
             decolar();
